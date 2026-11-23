@@ -1,0 +1,134 @@
+/* Theme tokens — contrast checked against white (AA): primary 6.9:1, muted 5.9:1 */
+:root {
+  --cs-primary: #0b5c52;
+  --cs-primary-hover: #084a42;
+  --cs-ink: #1b2428;
+  --cs-muted: #4f5b62;
+  --cs-focus: #7a3e00;
+  --bs-primary: var(--cs-primary);
+  --bs-primary-rgb: 11, 92, 82;
+  --bs-body-color: var(--cs-ink);
+  --bs-link-color: var(--cs-primary);
+  --bs-link-hover-color: var(--cs-primary-hover);
+  --bs-secondary-color: var(--cs-muted);
+}
+
+/* Bootstrap primary buttons pick up the themed colour */
+.btn-primary {
+  --bs-btn-bg: var(--cs-primary);
+  --bs-btn-border-color: var(--cs-primary);
+  --bs-btn-hover-bg: var(--cs-primary-hover);
+  --bs-btn-hover-border-color: var(--cs-primary-hover);
+  --bs-btn-active-bg: var(--cs-primary-hover);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--cs-primary);
+  --bs-btn-border-color: var(--cs-primary);
+  --bs-btn-hover-bg: var(--cs-primary);
+  --bs-btn-hover-border-color: var(--cs-primary);
+}
+.text-bg-primary { background-color: var(--cs-primary) !important; }
+
+/* Visible focus on everything interactive */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--cs-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.cs-layout__main:focus { outline: none; } /* programmatic focus target only */
+
+/* Skip link */
+.cs-skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2000;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  color: var(--cs-ink);
+  border: 2px solid var(--cs-focus);
+}
+
+/* Touch targets >= 44px */
+.cs-header .btn,
+.cs-header__search-input,
+.cs-primary-nav__link,
+.cs-footer__link { min-height: 44px; min-width: 44px; }
+.cs-primary-nav__link, .cs-footer__link { display: inline-flex; align-items: center; }
+
+/* Trending section */
+.cs-trending__title:focus { outline: none; } /* programmatic focus target only */
+
+/* Product card */
+.cs-product-card { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.cs-product-card:hover {
+  border-color: var(--cs-primary);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+}
+.cs-product-card__image { padding: 0.75rem; }
+.cs-product-card__placeholder { background: #e4e9ea; }
+.cs-product-card__link { color: var(--cs-ink); text-decoration: none; }
+.cs-product-card__link:hover { color: var(--cs-primary); text-decoration: underline; }
+/* Whole card is the click target, so the focus ring wraps the card, not just the title */
+.cs-product-card__link:focus-visible { outline: none; }
+.cs-product-card__link:focus-visible::after {
+  outline: 3px solid var(--cs-focus);
+  outline-offset: 2px;
+  border-radius: var(--bs-card-border-radius);
+}
+/* Stock state is always also written as text; colours are contrast-checked (AA) */
+.cs-product-card__stock--in-stock { color: var(--cs-primary); }
+.cs-product-card__stock--low-stock { color: var(--cs-focus); font-weight: 600; }
+.cs-product-card__stock--out-of-stock { color: #8a1c1c; font-weight: 600; }
+
+/* Form controls: Bootstrap's default border (#dee2e6) fails the 3:1 UI-component contrast.
+   #6c767b on white is 4.6:1. */
+:root { --cs-input-border: #6c767b; }
+.form-control, .form-check-input:not(:checked) { border-color: var(--cs-input-border); }
+
+/* Product detail */
+.cs-product-detail__stock--in-stock { color: var(--cs-primary); font-weight: 600; }
+.cs-product-detail__stock--low-stock { color: var(--cs-focus); font-weight: 600; }
+.cs-product-detail__stock--out-of-stock { color: #8a1c1c; font-weight: 600; }
+.cs-product-detail__spec-term { min-width: 7rem; }
+.cs-product-detail__description { max-width: 65ch; }
+
+/* Gallery: the active thumbnail is shown by a thicker border, not colour alone */
+.cs-gallery__image { padding: 1rem; }
+.cs-gallery__placeholder { background: #e4e9ea; }
+.cs-gallery__thumb {
+  width: 4rem;
+  height: 4rem;
+  padding: 0.125rem;
+  border: 1px solid var(--cs-muted);
+  border-radius: 0.375rem;
+  background: #fff;
+}
+.cs-gallery__thumb--active { border: 3px solid var(--cs-primary); padding: 0; }
+.cs-gallery__thumb-image { width: 100%; height: 100%; object-fit: contain; }
+
+/* Purchase form */
+.cs-purchase__qty-input { max-width: 8rem; min-height: 44px; }
+.cs-purchase__submit { min-height: 44px; }
+.cs-purchase__variant { min-height: 44px; display: flex; align-items: center; gap: 0.5rem; padding-left: 0; }
+.cs-purchase__variant-input { float: none; margin: 0; width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+.cs-purchase__variant-note { color: var(--cs-muted); }
+.cs-purchase__error { color: #8a1c1c; font-weight: 600; }
+
+/* Nav + brand */
+.cs-header__brand { color: var(--cs-primary); }
+.cs-primary-nav__link { color: var(--cs-ink); text-decoration: none; }
+.cs-primary-nav__link:hover { text-decoration: underline; }
+.cs-primary-nav__link.active { font-weight: 600; text-decoration: underline; }
+.cs-header__search { min-width: 0; }
+.cs-footer__copy { color: var(--cs-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
